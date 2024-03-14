@@ -1,0 +1,98 @@
+import java.util.Scanner;
+
+public class GradeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of subjects:");
+        int numSubjects = scanner.nextInt();
+
+        int totalMarks = 0;
+        for (int i = 1; i <= numSubjects; i++) {
+            System.out.print("Enter marks obtained in subject " + i + ": ");
+            int marks = scanner.nextInt();
+            totalMarks += marks;
+        }
+
+        double averagePercentage = (double) totalMarks / numSubjects;
+
+        char grade;
+        if (averagePercentage >= 90) {
+            grade = 'A';
+        } else if (averagePercentage >= 80) {
+            grade = 'B';
+        } else if (averagePercentage >= 70) {
+            grade = 'C';
+        } else if (averagePercentage >= 60) {
+            grade = 'D';
+        } else if (averagePercentage >= 50) {
+            grade = 'E';
+        } else {
+            grade = 'F';
+        }
+
+        System.out.println("\nResults:");
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Average Percentage: " + averagePercentage + "%");
+        System.out.println("Grade: " + grade);
+
+        scanner.close();
+    }
+}
+
+
+
+
+
+cat NumberGuessingGame.java
+import java.util.Scanner;
+import java.util.Random;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.println("Welcome to the Number Guessing Game!");
+        System.out.println("=====================================");
+
+        int minNumber = 1;
+        int maxNumber = 100;
+        int targetNumber;
+        int attempts;
+        int round = 1;
+        String playAgain;
+
+        do {
+            targetNumber = random.nextInt(maxNumber - minNumber + 1) + minNumber;
+            attempts = 0;
+            System.out.println("\nRound " + round + ":");
+
+            while (attempts < 3) {
+                System.out.print("Guess the number between " + minNumber + " and " + maxNumber + ": ");
+                int guess = scanner.nextInt();
+                attempts++;
+
+                if (guess == targetNumber) {
+                    System.out.println("Congratulations! You guessed the correct number " + targetNumber + " in " + attempts + " attempts.");
+                    break;
+                } else if (guess < targetNumber) {
+                    System.out.println("Too low! Try again.");
+                } else {
+                    System.out.println("Too high! Try again.");
+                }
+            }
+
+            if (attempts >= 3 && targetNumber != -1) {
+                System.out.println("Sorry! You have exceeded 3 attempts. The correct number was " + targetNumber + ".");
+            }
+
+            System.out.print("Do you want to play again? (yes/no): ");
+            playAgain = scanner.next();
+            round++;
+        } while (playAgain.equalsIgnoreCase("yes"));
+
+        System.out.println("Thank you for playing! Goodbye.");
+        scanner.close();
+    }
+}
